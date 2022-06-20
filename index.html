@@ -31,9 +31,12 @@
         </section>       
         <section class="form-wrapper">      
             <form class="question" id="form-question">
-                <h2 class="quiz-title">
-                    If you type the following code in the console window, what result will you get?
-                </h2>                
+                <div class="quiz-title">
+                    <h2>
+                        If you type the following code in the console window, what result will you get?
+                    </h2>
+                    <p>3 > 2 > 1 === false;</p>
+                </div>                
             </form>
             <div class="answers-container">
                 <ol class="answers" id="answer-items">
@@ -42,31 +45,34 @@
             </div>
             <div class="notify" id="notify-result">Correct!</div>           
         </section>
-        <section class="form-wrapper" id="hero-form">
-            <form class="notify-score-container">
-                <h2 class="score-title">All done!</h2>
-            </form>                    
-            <div class="notify-score-text">
-                <p>Your final score is</p>
-                <div class="score">1</div>
-            </div>
+        <section class="form-wrapper">      
+            <form class="question notify-score-container" id="form-question">
+                <div class="quiz-title score-title">
+                    <h2>All done!</h2>
+                    <p>Your final score is</p>
+                    <div class="score">1</div>
+                </div>                                
+            </form>
             <div class="player-container">
-                <p class="player-initial-text">Enter initials</p>
+                <p class="player-initial-text">Enter initials:</p>
+                <input type="text" class="text-input" placeholder="Enter initials" name="initials-name">
                 <button class="btn" id="score-submit" type="submit">Submit</button>
-            </div>            
-        </section>       
-        <section class="form-wrapper" id="high-scores-form">
-            <h2 class="high-score-title">High Scores</h2>                             
-            <div class="high-score-container">
-                <p>Player Scores</p>                
             </div>
-            <div class="btn-container">                
+            <div class="notify" id="notify-result">Correct!</div>       
+        </section>
+        <section class="form-wrapper" id="high-scores-form">      
+            <form class="question">                   
+                <div class="high-score-container">
+                    <h2 class="high-score-title">High Scores</h2> 
+                    <input type="text" class="text-input" placeholder="High Score" name="score-name">
+                </div>                
+            </form>
+            <div class="answers-container">
                 <button class="btn" id="go-back" type="submit">Go back</button>
-                <button class="btn" id="clear-score" type="submit">Clear high scores</button>
-            </div>            
+                <button class="btn" id="clear-score" type="submit">Clear high scores</butt
+            </div>                   
         </section>       
-    </main>
-    
+     </main>    
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
