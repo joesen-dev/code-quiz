@@ -1,13 +1,6 @@
 * {
-    padding: 0;
-    margin: 0;
     box-sizing: border-box;
 }
-/* header {
-    display: flex;
-    justify-content: center;
-    padding: 20px 35px;
-} */
 
 header {
     display: flex;
@@ -32,11 +25,26 @@ header {
     justify-content: flex-end;
     padding: 0 5px;    
 }
-
-
-.form {
-    position: relative;
+.page-content {
+    flex: 1; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 25px auto;
+    width: 50%;
+}
+.code-quiz-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    align-items: center;
+}
+.btn, #start-quiz {
+    color: white;
+    background-color: #351c75;
     display: flex;
     justify-content: center;
-    padding: 15px;
+    
 }
