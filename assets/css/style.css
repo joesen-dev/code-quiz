@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* header {
+    display: flex;
+    justify-content: center;
+    padding: 20px 35px;
+} */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 30px 15px;
+}
+.banner-score {
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px 12px;
+}
+.banner-timer {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 12px;
+}
+.banner-timer-count {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 5px;    
+}
+
+
+.form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
