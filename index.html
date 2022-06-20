@@ -17,9 +17,9 @@
     </header>
 
     <main class="page-content" id="page-content">
-        <section class="code-quiz-wrapper">
+        <section class="form-wrapper">
             <form>
-                <h1 class="code-quiz-title">Coding Quiz Challenge</h1>
+                <h1 class="quiz-title">Coding Quiz Challenge</h1>
                 <p>
                     Try to answer the following code-related questions within the time limit.
                     Keep in mind that incorrect answers will penalize your score/time by ten seconds!
@@ -29,18 +29,41 @@
                 <button class="btn" id="start-quiz" type="submit">Start Quiz</button>
             </div>            
         </section>       
-        <section class="code-quiz-wrapper">
-            <form>
-                <h1 class="list-title"></h1>                
+        <section class="form-wrapper">      
+            <form class="question" id="form-question">
+                <h2 class="quiz-title">
+                    If you type the following code in the console window, what result will you get?
+                </h2>                
             </form>
-            <div>
-                <ul class="answers" id="answer-items">
-                    <li>Multiple choice answers</li>
-                    <li>Multiple choice answers</li>
-                    <li>Multiple choice answers</li>
-                </ul>
+            <div class="answers-container">
+                <ol class="answers" id="answer-items">
+                    <li>Multiple choice answers</li>                  
+                </ol>
             </div>
-            <div class=" notify" id="notify-result">Correct!</div>           
+            <div class="notify" id="notify-result">Correct!</div>           
+        </section>
+        <section class="form-wrapper" id="hero-form">
+            <form class="notify-score-container">
+                <h2 class="score-title">All done!</h2>
+            </form>                    
+            <div class="notify-score-text">
+                <p>Your final score is</p>
+                <div class="score">1</div>
+            </div>
+            <div class="player-container">
+                <p class="player-initial-text">Enter initials</p>
+                <button class="btn" id="score-submit" type="submit">Submit</button>
+            </div>            
+        </section>       
+        <section class="form-wrapper" id="high-scores-form">
+            <h2 class="high-score-title">High Scores</h2>                             
+            <div class="high-score-container">
+                <p>Player Scores</p>                
+            </div>
+            <div class="btn-container">                
+                <button class="btn" id="go-back" type="submit">Go back</button>
+                <button class="btn" id="clear-score" type="submit">Clear high scores</button>
+            </div>            
         </section>       
     </main>
     

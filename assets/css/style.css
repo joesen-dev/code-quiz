@@ -14,6 +14,7 @@ header {
     display: flex;
     justify-content: flex-start;
     padding: 5px 12px;
+    color: #d395ef;
 }
 .banner-timer {
     display: flex;
@@ -33,18 +34,60 @@ header {
     margin: 25px auto;
     width: 50%;
 }
-.code-quiz-wrapper {
+.form-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
-    text-align: center;
-    align-items: center;
+    text-align: center;    
 }
-.btn, #start-quiz {
+h1, h2 {
+    font-size: 30px;
+    font-weight: 900;
+    font-family: cursive;  
+}
+p {
+    font-weight: normal;
+    font-family: cursive;
+}
+.btn {
     color: white;
     background-color: #351c75;
+    font-size: 16px;   
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+}
+.question {  
     display: flex;
-    justify-content: center;
-    
+    justify-content: flex-start;
+    text-align: left;    
+}
+.answers-container {
+    display: flex;
+    flex-direction: row;
+}
+.answers {  
+    color: white;
+    background-color: #351c75;
+    font-size: 16px;   
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;    
+}
+.notify {
+    font-size: 28px;
+    border-top: 2px solid;
+    border-color: gray;
+    color: grey; 
+    width: 95%;
+    display: flex;
+    justify-content: flex-start;
+}
+.notify-score-container {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
 }
