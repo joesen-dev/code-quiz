@@ -17,19 +17,19 @@
     </header>
 
     <main class="page-content" id="page-content">
-        <section class="form-wrapper">
-            <form>
-                <h1 class="quiz-title">Coding Quiz Challenge</h1>
-                <p>
+        <form class="form-wrapper" id="wrapper">
+            <div id="question-div">
+                <h1 class="quiz-title" id="title" name="quiz-header">Coding Quiz Challenge</h1>
+                <p id="description">
                     Try to answer the following code-related questions within the time limit.
                     Keep in mind that incorrect answers will penalize your score/time by ten seconds!
                 </p>
-            </form>
-            <div>
-                <button class="btn" id="start-quiz" type="submit">Start Quiz</button>
+            </div>
+            <div id="answers-div">
+                <button class="btn" name="start-quiz" type="submit" id="start">Start Quiz</button>
             </div>            
-        </section>       
-        <section class="form-wrapper">      
+            </form>       
+        <!-- <section class="form-wrapper">      
             <form class="question" id="form-question">
                 <div class="quiz-title">
                     <h2>
@@ -39,13 +39,20 @@
                 </div>                
             </form>
             <div class="answers-container">
-                <ol class="answers" id="answer-items">
-                    <li>Multiple choice answers</li>                  
+                <ol>
+                    <li class="answers" id="answer-items">
+                        Multiple choice answers
+                    </li>                  
+                    <li class="answers" id="answer-items">
+                        Multiple choice answers
+                    </li>                  
                 </ol>
             </div>
             <div class="notify" id="notify-result">Correct!</div>           
-        </section>
-        <section class="form-wrapper">      
+        </section> -->
+
+
+        <!-- <section class="form-wrapper">      
             <form class="question notify-score-container" id="form-question">
                 <div class="quiz-title score-title">
                     <h2>All done!</h2>
@@ -71,7 +78,7 @@
                 <button class="btn" id="go-back" type="submit">Go back</button>
                 <button class="btn" id="clear-score" type="submit">Clear high scores</butt
             </div>                   
-        </section>       
+        </section>         -->
      </main>    
     <script src="./assets/js/script.js"></script>
 </body>
