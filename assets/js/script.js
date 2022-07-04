@@ -4,25 +4,40 @@ questionIdCounter = 0;
 const mainEl = document.querySelector("#page-content");
 const formEl = document.querySelector("#wrapper");
 const questionDivEl = document.querySelector("#question-div");
+const parentDivEl = document.querySelector("#parent-div");
 const h1El = document.querySelector("#title");
 const pEl = document.querySelector("#description");
 const buttonDivEl = document.querySelector("#answers-div")
-const buttonEl = document.querySelector("#start");
+// const buttonEl = document.querySelector("#start");
+const buttonEl = document.getElementsByTagName("button"); 
+const startQuiz = document.getElementById("start");
 
 const countdownEl = document.querySelector("#time-left");
+function startCountDown() {
+    //  add Countdown timer and set amount of time
+    const startMinutes = 2;
+    let time = startMinutes * 60;
 
+    // set countdown interval
+    setInterval(updateCountdown, 1000);
 
+    // create countdown function
+    function updateCountdown() {
+        const minutes = Math.floor(time / 60);
+        let seconds = time % 60;
 
-
-
+        countdownEl.innerHTML = `${minutes}: ${seconds}`;
+        time--;
+    }   
+}
 
 // STORE QUESTIONS with correct answer
-const questionsAry = [
+const questionsArray = [
     {
         question: "If you type the following code in the console window, what result will you get?\n3 > 2 > 1 === false;", 
-        answers: ["True", 
-            "False"],
-        solution: ["False"]
+        answers: ["a. True", 
+            "b. False"],
+        solution: ["b. False"]
         
     },
     {
@@ -56,268 +71,152 @@ const questionsAry = [
     },
 ];
 
-var clickDataObj = {
-    question: questionsAry.question,
-    answers: questionsAry.answers,
-    solution: questionsAry.solution,
-  };
+var i = 0;
+var questions = questionsArray[i].question
+var answers = questionsArray[i].answers
+var solution = questionsArray[i].solution
 
-var score = 0;
+// STORE POINTS
+var score = [];
 
-// This block creates HTML elements and attached them to the form
-// TODO: can be used closer to the end of quiz IGNORE FOR NOW!
-// var createQuestion = function() {
-//     //
-//     var questionDivEl = document.createElement("div");          
-//     questionDivEl.setAttribute("id", "question-div");
-//     console.log(questionDivEl); 
-//     formEl.appendChild(questionDivEl);    
-//     var h1El = document.createElement("h1");  
-//     h1El.className = "question";
-//     h1El.setAttribute("id", "title");
-//     console.log(h1El);     
-//     questionDivEl.appendChild(h1El);
-//     console.log(questionDivEl);
-// }
-
-// START BUTTON CLICKED
-var quizFormHandler = function(event) {
-    event.preventDefault();
-    console.log("clicked");      
-
-    // RESET START QUIZ BLOCK    
+// RESET ELEMENTS FUNCTION
+function reset() {
     document.getElementById("title").innerHTML = ""
     document.getElementById("description").innerHTML = ""
-    var startQuiz = document.getElementById("start");
-    startQuiz.remove(); 
-
-    startCountDown();
-    createEl();       
+    document.querySelector("#answers-div").innerHTML = ""
+    // document.querySelector("#parent-div").innerHTML = ""
+    startQuiz.remove();
 }
 
-function startCountDown() {
-    //  add Countdown timer and set amount of time
-    const startMinutes = 2;
-    let time = startMinutes * 60;
+// START BUTTON CLICKED
 
-    // set countdown interval
-    setInterval(updateCountdown, 1000);
+startQuiz.addEventListener("click", function(event) {
+    // debugger;
+    event.preventDefault();
+    console.log("clicked")
+    console.log(score); 
+    reset()
+    printQuestion()
+    printAnswers(answers, solution);
+})
 
-    // create countdown function
-    function updateCountdown() {
-        const minutes = Math.floor(time / 60);
-        let seconds = time % 60;
+questionsArray.forEach(function(i) {
+    // const startQuiz = document.getElementById("start");
+    // startQuiz.addEventListener("click", function(event) {
+    //     debugger;
+    //     event.preventDefault();
+    //     console.log("clicked")
+    //     console.log(score); 
+    //     reset()
+    //     printQuestion()
+    //     printAnswers(answers, solution);
+    // })
+});
 
-        countdownEl.innerHTML = `${minutes}: ${seconds}`;
-        time--;
-    }   
+
+var quizFormHandler = function(event) {
+    event.preventDefault();
+    console.log("clicked");
+    
+    console.log(score); 
+
+    // startCountDown();
+    reset()
+    printQuestion()
+    printAnswers(answers, solution);     
 }
 
-function createEl(questions) {
-    debugger;   
-    questions = questionsAry.question
-    console.log(questions);
-    while (i = 0 < questionsAry.question.length) {
-        for(var i = 0; i < questionsAry.length; i++) {        
-            // Pull questions for questionsAry   
-            var quizQuestion = questionsAry[i].question;
+
+// PRINT QUESTION         
+function printQuestion() {
+    document.getElementById("title").innerHTML = questions;
+}
+
+// PRINT ANSWER
+function printAnswers(answers, solution) {
+    // debugger;                        
+    console.log(solution);
+    var ourSolution = solution[0];
+    console.log(ourSolution);           
+    if(answers) {
+        console.log(answers);
+        answers.forEach(function(answer) {
             // debugger;
-            // set unique className with questionIdCounter
-            document.getElementById("title").setAttribute("className", questionIdCounter)
-            // If the there still questions send them to listQuestionDataAry
-            if (quizQuestion) {                    
-                console.log(quizQuestion);
-            }            
-            matchQA();
-            // CHECK QUESTION MATCHeS ANSWER 
-            function matchQA() {
-                // debugger;                                  
-                // Target questionsAry[0]
-                questionsAry.forEach(function(getObj) {                    
-                    // Target questionsAry[0].answers
-                    getObj.answers.forEach(function(getAnswers) {
-                        console.log(getAnswers);
-                    });
-                    printElements(getObj);
+            var buttonEl = document.createElement("button");                    
+            buttonEl.className = "answers btn";
+            buttonEl.type = "submit";
+            buttonEl.name = "answer-btn-name";                                        
+            console.log(buttonEl);
+            buttonEl.innerHTML = answer;
+            if(buttonEl.innerHTML === ourSolution) {
+                buttonEl.setAttribute("id", solution);
+            }                     
+            buttonDivEl.appendChild(buttonEl);
+            console.log(buttonDivEl);                    
+            // answerIdCounter++;
 
-                    // // TODO: --------------------------------------FIX ENDLESS LOOP
-                    // for(var i = 0; i < [getObj.answers].length; i++) {
-                    //     // debugger;
-                    //     var storeAnswer = [getObj.answers];
-                    //     console.dir(storeAnswer);
-                    //     printElements(getObj, storeAnswer);
-                    // }
-                    // // TODO: --------------------------------------FIX ENDLESS LOOP
-
-                });
-                
-            }
-            // PRINT Q&As
-            function printElements(getObj) {
-                // debugger; 
-                let question = getObj.question;
-                console.log(question);
-                let answer = getObj.answers; 
-                console.log(answer);
-                splitAnswers(answer);
-                function splitAnswers(answer) {
-                    for(var i = 0; i < answer.length; i++) {
-                        if(answer.length === 2 || answer.length > 4) {
-                            console.log(true);
-                        }                
-                }              
-                
-                // PRINT QUESTION
-                printQuestion() 
-                function printQuestion() {
-                    document.getElementById("title").innerHTML = question;
+            // are all answers printed?
+            validateAnswers(answers, solution);
+            function validateAnswers(answers, solution) {    
+                console.log(answers)
+                document.getElementById("title").setAttribute("className", questionIdCounter)
+                var printedAnswers = document.getElementsByClassName("answers btn");
+                 console.dir(printedAnswers);
+                //  check that all answers are printed
+                if(printedAnswers.length === answers.length) {
+                    console.log("All answers are printed!");
                 }
-                // PRINT ANSWER
-                printAnswer()
-                // debugger; 
-                function printAnswer() {
-                    if (answer) {
-                        
-                        // TODO: THIS block PRINTS ANSWERS TO THE SAME DIV!
-                        answer.forEach(function (printAnswer) {
-                            console.log(printAnswer);                         
-                            var buttonEl = document.createElement("button");
-                            console.log(buttonEl);
-                            buttonEl.className = "answers btn";
-                            buttonEl.type = "submit";
-                            buttonEl.name = "btn_name";
-                            buttonEl.setAttribute("onclick", "validate(event)")
-                            console.log(buttonEl);
-                            buttonEl.setAttribute("id", answerIdCounter); 
-                            buttonEl.innerHTML = printAnswer; 
-                            buttonDivEl.appendChild(buttonEl);
-                            console.log(buttonDivEl);
-                            answerIdCounter++;                
-                        })                        
-                    }
-                }
-                checkPrintedQA(getObj)
-                function checkPrintedQA(getObj) {
-                    let question = getObj.question
-                    let answer = getObj.answers
-                    let solution = getObj.solution
-                    console.log(question, answer, solution);             
-                    if(question, answer, solution) {
-                        console.log("woo!")
-                        // listen for click
-                    } else { return}
-                }            
-                
-            }; 
-        }        
-        }
-        i++;
-        debugger;
-    }
-    
-       
-    questionIdCounter++;       
-};
-
-
-
-function validate() {    
-   console.log("woo!")
-}
-
-let notClicked = document.querySelector("button[name='btn_name']")
-
-var clickDataObj = {
-    status: notClicked
-  };
-// function validate() {
-// // TODO: Pick answer code block
-// switch (clickDataObj) {
-//     case solution:
-//       taskActionsEl.querySelector("select[name='status-change']").selectedIndex = 0;
-//       tasksToDoEl.append(listItemEl);
-//       break;
-//     case "in progress":
-//       taskActionsEl.querySelector("select[name='status-change']").selectedIndex = 1;
-//       tasksInProgressEl.append(listItemEl);
-//       break;
-//     case "completed":
-//       taskActionsEl.querySelector("select[name='status-change']").selectedIndex = 2;
-//       tasksCompletedEl.append(listItemEl);
-//       break;
-//     default:
-//       console.log("Something went wrong!");
-//   }
-// }
-
-console.dir(questionDivEl.childElementCount);
-function validateAllQA(printedQ, printedA) {
-    printedQ = questionDivEl.childElementCount
-    printedA = buttonDivEl.childElementCount
-    console.log(printedQ);
-    console.log(printedA);
-    if(printedQ = 2 && printedA <= 4) {
-        console.log(true);
-        buttonEl.onclick = () => {
-            console.log(clicked);
-        }                
-    } else {
-        console.log("False")
-    }  
-}  
- // TODO: check if full Q&A block is printed
-        // debugger;
-        // targe buttonDivEl (this logs the number of child elements in the button div)
-        // console.dir(buttonDivEl.childElementCount);
-        
-
-// TODO: CHECK FOR THE RIGHT ANSWER
-function checkAnswer(solution) {
-    questionsAry.forEach(function(getObj) {
-        solution = getObj.solution 
-        console.log(solution);
-        debugger;
-
-        // // TODO: pull HTMLCollection items
-        // let pull = document.forms["btn_name"]
-        // console.log(pull);
-
-        let pull = document.getElementsByClassName("answers")
-        console.log(pull);          
-        // name pull HTMLCollection items as answers
-        let a = pull[0];
-        let b = pull[1];
-        let c = pull[2];
-        let d = pull[3];              
-        debugger; 
-        buttonEl.addEventListener("answers", validateAnswer())        
-        function validateAnswer() {
-            console.log("clicked");
-            if (validateAnswer) {
-                createEl();                
             }
-            // for(var i = 0; i < pull.length; i++) {
-            //     console.log(pull)  
-            //     if (pull === solution) {
-            //         console.log(true)
-            //         let divEl = document.createElement("div")
-            //         divEl.innerHTML = 
-            //         "<div class='notify' id='notify-result'>" + "Correct!" 
-            //         + "</div>"
-            //         formEl.appendChild(divEl);
-            //     }
-            // }
-        }
-                
-    })
-    
-}
 
-// listen for a click on a button
-buttonEl.addEventListener("click", validate);
+            // check clicked answer
+            buttonEl.addEventListener("click", function() {
+                event.preventDefault();                        
+                var i = 0;
+                questions = questionsArray[i].question
+                answers = questionsArray[i].answers
+                solution = questionsArray[i].solution
+                console.log(questions);
+                console.log(answers);
+                console.log(solution);    
+                var ourSolution = solution[0];
+                if("click" && buttonEl.innerHTML === ourSolution) {
+                    // debugger;        
+                    var divEl = document.createElement("div");                    
+                    divEl.className = "notify";
+                    divEl.setAttribute("id", "notify-result");
+                    divEl.innerHTML = "Correct!"                    
+                    parentDivEl.appendChild(divEl);
+                    var points = 10
+                    score.push(points);
+                    console.log(score);
+                    reset();
+                } else {        
+                    var divEl = document.createElement("div");                    
+                    divEl.className = "notify";
+                    divEl.setAttribute("id", "notify-result");
+                    divEl.innerHTML = "Wrong!"
+                    parentDivEl.appendChild(divEl);
+                    console.log(score);
+                    reset();
+                }
+
+                // TODO: add switch for new QA
+                debugger;
+                console.log(questionsArray)
+                switch (questionsArray) {                    
+                    case "question":
+                        printQuestion()
+                    break;
+                    case "answer":
+                        printAnswers(answers, solution);
+                        break;
+                    default:
+                        console.log("Something went wrong!");
+                }
+            })
+        });
+    }    
+}
 
 // Start Quiz
-mainEl.addEventListener("submit", quizFormHandler);
-
-
-
+// startQuiz.addEventListener("click", quizFormHandler);

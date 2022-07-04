@@ -29,8 +29,7 @@ header {
 .page-content {
     flex: 1; 
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: wrap;    
     margin: 25px auto;
     width: 50%;
 }
@@ -65,7 +64,10 @@ p {
 }
 .answers-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 35%;
+
 }
 .answers {  
     color: white;
@@ -86,6 +88,7 @@ p {
     width: 95%;
     display: flex;
     justify-content: flex-start;
+    margin-top: 20px;
 }
 .notify-score-container {
     display: flex;

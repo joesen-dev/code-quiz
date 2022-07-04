@@ -26,32 +26,14 @@
                 </p>
             </div>
             <div id="answers-div">
-                <button class="btn" name="start-quiz" type="submit" id="start">Start Quiz</button>
-            </div>            
-        </form>       
-        <!-- <section class="form-wrapper">      
-            <form class="question" id="form-question">
-                <div class="quiz-title">
-                    <h2>
-                        If you type the following code in the console window, what result will you get?
-                    </h2>
-                    <p>3 > 2 > 1 === false;</p>
-                </div>                
-            </form>
-            <div class="answers-container">
-                <ol>
-                    <li class="answers" id="answer-items">
-                        Multiple choice answers
-                    </li>                  
-                    <li class="answers" id="answer-items">
-                        Multiple choice answers
-                    </li>                  
-                </ol>
-            </div>
-            <div class="notify" id="notify-result">Correct!</div>           
-        </section> -->
-
-
+                <button data-click-function="start-quiz" class="btn" name="start-quiz" type="submit" id="start">Start Quiz</button>
+            </div>        
+        </form>
+        <section class="page-content" id="handle-btn">
+            <div id="handle-reset"></div>
+        </section>
+        
+        <!-- TODO: remove-->
         <!-- <section class="form-wrapper">      
             <form class="question notify-score-container" id="form-question">
                 <div class="quiz-title score-title">
@@ -64,8 +46,7 @@
                 <p class="player-initial-text">Enter initials:</p>
                 <input type="text" class="text-input" placeholder="Enter initials" name="initials-name">
                 <button class="btn" id="score-submit" type="submit">Submit</button>
-            </div>
-            <div class="notify" id="notify-result">Correct!</div>       
+            </div>    
         </section> -->
         <!-- <section class="form-wrapper" id="high-scores-form">      
             <form class="question">                   
@@ -81,6 +62,7 @@
         </section>        -->
      </main>    
     <!-- <script src="./assets/js/script.js"></script> -->
+    <!-- <script src="./assets/js/scriptv2.js"></script> -->
     <script src="./assets/js/scriptv2.js"></script>
 </body>
 </html>
