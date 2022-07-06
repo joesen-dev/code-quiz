@@ -32,6 +32,7 @@ header {
     flex-wrap: wrap;    
     margin: 25px auto;
     width: 50%;
+    /* pointer-events: none; */
 }
 .form-wrapper {
     display: flex;
@@ -49,6 +50,9 @@ p {
     font-weight: normal;
     font-family: cursive;
 }
+/* .player-initials-text {
+    pointer-events: auto;
+} */
 .btn {
     color: white;
     background-color: #351c75;
@@ -56,18 +60,18 @@ p {
     border: none;
     padding: 10px 25px;
     border-radius: 10px;
+    /* pointer-events: initial; */
 }
 .question {  
     display: flex;
     justify-content: flex-start;
-    text-align: left;    
+    text-align: left;  
 }
 .answers-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 35%;
-
+    width: 35%; 
 }
 .answers {  
     color: white;
@@ -78,7 +82,7 @@ p {
     border-radius: 10px;
     display: flex;
     justify-content: flex-start; 
-    margin: 3px;   
+    margin: 3px;
 }
 .notify {
     font-size: 28px;

@@ -1,10 +1,20 @@
 questionIdCounter = 0;
 
-const mainEl = document.querySelector("#page-content");
+// START BUTTON EVENT
+const startQuiz = document.getElementById("start");
+
+// MAIN CONTENT
+const mainEl = document.querySelector("#main-content");
+
+// QUESTION CONTAINER
+const questionFormEL = document.getElementById("form-question");
+
+// ANSWER BUTTONS CONTAINER
+const answerFormEl = document.getElementById("form-answer");
+
 const titleFormEl = document.querySelector("#wrapper");
 const sectionEl = document.querySelector("#handle-btn")
 const sectionDivEl = document.querySelector("#handle-reset");
-const answerFormEl = document.querySelector("#form-answer");
 const notifyFormEl = document.querySelector("#notify-parent-div");
 const notifyDivEl = document.querySelector("#notify-result");
 
@@ -15,7 +25,7 @@ const generalStorageArray = [
         answers: [
             "1. True", 
             "2. False"],
-        solution: ["b. False"]
+        solution: ["2. False"]
         
     },
     {
@@ -25,7 +35,7 @@ const generalStorageArray = [
             "2. Server", 
             "3. Both", 
             "4. None"],
-        solution: ["d. None"]                
+        solution: ["4. None"]                
     },
     {
         question: "Which JavaScript label catches all the values, except for the ones specified?",
@@ -34,7 +44,7 @@ const generalStorageArray = [
             "2. Label", 
             "3. Try", 
             "4. Default"],
-        solution: ["d. Default"]                
+        solution: ["4. Default"]                
     },
     {
         question: "Which of the following will write the message “Hello DataFlair!” in an alert box?",
@@ -43,7 +53,7 @@ const generalStorageArray = [
             "2. alert(Hello DataFlair!);", 
             "3. msgAlert('Hello DataFlair!');", 
             "4. alert('Hello DataFlair!');"],
-        solution: ["d. alert('Hello DataFlair!');"]               
+        solution: ["4. alert('Hello DataFlair!');"]               
     },
     {
         question: "What will the code return? Boolean(3 < 7)",
@@ -52,7 +62,7 @@ const generalStorageArray = [
             "2. False", 
             "3. NaN", 
             "4. SyntaxError"],
-        solution: ["a. True"]                
+        solution: ["1. True"]                
     },
 ];
 
@@ -62,22 +72,17 @@ var trainArray = [];
 // STORE POINTS
 var score = [];
 
+// START QUIZ LOGIC
 var quizFormHandler = function(event) {
-    event.preventDefault();
-    // was the start button clicked?
     var startQuiz = document.querySelector("#start");
     if (startQuiz) {
-        console.log("Start Button Clicked");        
-
         titleFormEl.remove();
-        
         getQAs();
     } 
 };
 
 // Get QAs from Questions Array
 var getQAs = function() {
-    console.log(generalStorageArray)
     var nextQuestion = generalStorageArray.shift()
     console.log(generalStorageArray)
     console.log(nextQuestion)
@@ -89,19 +94,10 @@ var getQAs = function() {
         console.log(notify);
 
         notify.remove();
-    } 
-    
-    // have all question been asked and answered?
-    // switch(generalStorageArray.length === 0){
-    //     default:
-    //     console.log("END OF TEST")
-    //     finishedQuiz();
-    //     break;
-    // }
+    }
 
     // clear trainArray in case of iteration
     trainArray.shift()
-    console.log(trainArray)
 
     // send QA + solution to trainArray
     trainArray.push(nextQuestion)
@@ -113,22 +109,21 @@ var getQAs = function() {
         if (generalStorageArray.length === 0) {break;}
         // Assign QAs + solution to variables
         var question = trainArray[0].question;
-        console.log(question)
         var answer = trainArray[0].answers;
-        console.log(answer)
         var solution = trainArray[0].solution;
-        console.log(solution)
+        console.log(
+            question,
+            answer,
+            solution)
         
         // Print QAs
         switch (trainArray[0].question) {                   
             case question:
-                console.log(question)
                 printQuestion(question)                
             break;
         }
         switch (trainArray[0].answers) {
             case answer:
-                console.log(answer)
                 printAnswers(answer, solution);
             break;
         }
@@ -145,61 +140,57 @@ var getQAs = function() {
     }
 };
 
-
-
 // PRINT QUESTION 
 var printQuestion = function(question) {
-    // new form for QAs
-    var questionFormEL = document.createElement('form');
-    questionFormEL.className = "question";
-    questionFormEL.setAttribute("id", "form-question");
-    sectionDivEl.appendChild(questionFormEL);
-
+    console.log(questionFormEL);
+    console.log(question)
     var questionDivEl = document.createElement('div');
-    questionDivEl.className = "question-form";
-    questionDivEl.setAttribute("data-question-id", "question");
+    questionDivEl.className = "question-div";
+    questionDivEl.setAttribute("id", "question");
+    
     questionFormEL.appendChild(questionDivEl);
+    console.log(questionFormEL)
 
     var h2El = document.createElement('h2');
     h2El.setAttribute("id", "title-question");
+    h2El.innerHTML = question;
     questionDivEl.appendChild(h2El);
+    console.log(questionDivEl)
 
-    document.getElementById("title-question").innerHTML = question;
+    // document.getElementById("title-question").innerHTML = question;
 }
 
 // PRINT ANSWER
 function printAnswers(answer, solution) {
-    var answerFormEL = document.createElement('form');
-    answerFormEL.className = "answers-container";
-    answerFormEL.setAttribute("id", "form-answer");
-    sectionDivEl.appendChild(answerFormEL);
+    // var answerFormEL = document.createElement('form');
+    // answerFormEL.className = "answers-container";
+    // answerFormEL.setAttribute("id", "form-answer");
+    // sectionDivEl.appendChild(answerFormEL);
 
-    console.log(solution);
-    var ourSolution = solution[0];
-    console.log(ourSolution);           
+    var ourSolution = solution[0];              
     if(answer) {
-        console.log(answer);
         answer.forEach(function(answer) {
             var buttonEl = document.createElement("button");                    
             buttonEl.className = "answers btn";
-            buttonEl.name = "answer-btn-name";                                        
-            console.log(buttonEl);
+            buttonEl.name = "answer-btn-name";
+            buttonEl.type = "submit";
             buttonEl.innerHTML = answer;
             buttonEl.setAttribute("id", "btn-click");
             if(answer === ourSolution) {
+                console.log("True");
                 buttonEl.setAttribute("data-button", answer)
             }
                  
-            answerFormEL.appendChild(buttonEl);
-            console.log(answerFormEL);
+            answerFormEl.appendChild(buttonEl);
         });
-    }    
+    }
+    console.log(answerFormEl);  
 }
 
 // VALIDATE ANSWER
 var validateAnswers = function(answer, solution) {
     console.log(answer)
-    document.getElementById("title-question").setAttribute("className", questionIdCounter)
+    // document.getElementById("title-question").setAttribute("className", questionIdCounter)
     var printedAnswers = document.getElementsByClassName("answers btn");
      console.dir(printedAnswers);
     //  check that all answers are printed
@@ -208,22 +199,30 @@ var validateAnswers = function(answer, solution) {
     }
 }
 
-var buttonClickHandler = function(event) {
-    // get button attribute from clicked element
-    event.preventDefault();
-    var button = event.target.getAttribute("data-button");
-    var divEl = document.createElement("div");                    
-        divEl.className = "notify";
-        divEl.setAttribute("id", "notify-result");
-    if(button) {
-        goodAnswer(divEl);
-    }else {
-        badAnswer(divEl);
-    }
-    reset();
-}
+// TODO: REMOVE
+// var buttonClickHandler = function(e) {
+//     // get button attribute from clicked element
+//     // var button = event.target.getAttribute("data-button");
+//     // button = document.getElementById("form-answer").children;
+//     // console.log(button)
+//     debugger;
+//     // var correctAnswer = button("button[class='answers']");
+//     // ("div[class='notify']")
+    
+//     // console.log(correctAnswer)
+//     var divEl = document.createElement("div");                    
+//         divEl.className = "notify";
+//         divEl.setAttribute("id", "notify-result");
+//     if(e.target.matches("data-button")) {
+//         goodAnswer(divEl);
+//     }else {
+//         badAnswer(divEl);
+//     }
+//     reset();
+// }
 
 var goodAnswer = function(divEl) {
+    
     divEl.innerHTML = "Correct!"                    
         sectionEl.appendChild(divEl);
         var points = 10
@@ -238,35 +237,84 @@ var badAnswer = function(divEl) {
 }
 
 // RESET QA FORM
-var reset = function() {
+var reset = function(questionDivEl) {
     // reset sectionEl
-    sectionDivEl.innerHTML = "";
+    // reset Question
+    questionDivEl = document.getElementById("question");
+    questionDivEl.remove();
+
+    // reset Answer
+    answerFormEl.innerHTML = "";
+    
+    console.log(questionFormEL);
+    console.log(answerFormEl);
     getQAs();
 }
 
 // TODO: User has finished quiz. Show their score, record their name & save it to localStorage
 var finishedQuiz = function() {
-    debugger;
+    var outro = "All Done!"
     sectionEl.innerHTML = "";
     console.log("User Finished Quiz!");
     // create form container for ALL DONE ELEMENTS
     var formScoreEl = document.createElement("form");
-    formScoreEl.className = "question" + "notify-score-container"
+    formScoreEl.className = "question" + " notify-score-container"
+    sectionEl.appendChild(sectionDivEl)
     sectionDivEl.appendChild(formScoreEl);
-
+    
     // create div for final score text content
     var divScoreEl = document.createElement("div");
-    // create h2El 
-    var h2ScoreEl = document.createElement("h2")
-    // create pEl
-    var pScoreEl = document.createElement("p")
-    // create span for score count
-    var spanEl = document.createElement("span")
+    divScoreEl.className = "quiz-title" + " score-title"
+    divScoreEl.innerHTML = 
+        "<h2>" + outro + "</h2>"
+        // TODO: FIX score to print on page
+        + "<p>" + 'Your final score is' + ' ' + score + '.' + "</p>"
+    formScoreEl.appendChild(divScoreEl)
+    console.log(divScoreEl)
 
+    // create div for User name/scores,text-box and submit buttons
+    var divUserNameEl = document.createElement("div");
+    divUserNameEl.className = "player-name-container" + " high-score-container"
+    var userNamePEl = document.createElement("p");
+    userNamePEl.className = "player-initials-text"
+    userNamePEl.innerHTML = "Enter initials:"
+        +"<input type='text' class='text-input' placeholder='Enter initials' name='initials-text'>"
+        +"<button class='btn' id='score-submit' type='submit'>"
+        +'Submit' + "</button>"
+    divScoreEl.appendChild(userNamePEl)
 
 }
 
 // Click to Start Quiz
-mainEl.addEventListener("submit", quizFormHandler);
+startQuiz.addEventListener("click", e=>{
+    // Isolate click to start button
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Start Button Clicked!");
+    quizFormHandler();
+})
+
+// Handle clicks on answers
+answerFormEl.addEventListener("click", e=>{
+    // Isolate click to start button
+    e.preventDefault();
+    e.stopPropagation();
+
+    console.log("Answer Button Clicked!");
+    var divEl = document.createElement("div");                    
+        divEl.className = "notify";
+        divEl.setAttribute("id", "notify-result");
+    
+    // Check answer
+    if(e.target.getAttribute("data-button")) {
+        goodAnswer(divEl);
+    }else {
+        badAnswer(divEl);
+    }
+    // debugger;
+    reset();
+})
+
+// mainEl.addEventListener("submit", quizFormHandler);
 // Handle User's answer
-sectionEl.addEventListener("click", buttonClickHandler);
+// sectionEl.addEventListener("click", buttonClickHandler)
