@@ -156,17 +156,11 @@ var printQuestion = function(question) {
     h2El.innerHTML = question;
     questionDivEl.appendChild(h2El);
     console.log(questionDivEl)
-
-    // document.getElementById("title-question").innerHTML = question;
 }
 
 // PRINT ANSWER
 function printAnswers(answer, solution) {
-    // var answerFormEL = document.createElement('form');
-    // answerFormEL.className = "answers-container";
-    // answerFormEL.setAttribute("id", "form-answer");
-    // sectionDivEl.appendChild(answerFormEL);
-
+    
     var ourSolution = solution[0];              
     if(answer) {
         answer.forEach(function(answer) {
@@ -198,28 +192,6 @@ var validateAnswers = function(answer, solution) {
         console.log("All answers are printed!");
     }
 }
-
-// TODO: REMOVE
-// var buttonClickHandler = function(e) {
-//     // get button attribute from clicked element
-//     // var button = event.target.getAttribute("data-button");
-//     // button = document.getElementById("form-answer").children;
-//     // console.log(button)
-//     debugger;
-//     // var correctAnswer = button("button[class='answers']");
-//     // ("div[class='notify']")
-    
-//     // console.log(correctAnswer)
-//     var divEl = document.createElement("div");                    
-//         divEl.className = "notify";
-//         divEl.setAttribute("id", "notify-result");
-//     if(e.target.matches("data-button")) {
-//         goodAnswer(divEl);
-//     }else {
-//         badAnswer(divEl);
-//     }
-//     reset();
-// }
 
 var goodAnswer = function(divEl) {
     
@@ -263,12 +235,24 @@ var finishedQuiz = function() {
     sectionDivEl.appendChild(formScoreEl);
     
     // create div for final score text content
+    // debugger;
+
+    // set final score variable
+    var finalScore = 0
+
+    // get final score for Score Array
+    for (var i = 0; i < score.length; i++) {
+        finalScore += score[i];
+    }
+    console.log(finalScore);
+
+    
     var divScoreEl = document.createElement("div");
     divScoreEl.className = "quiz-title" + " score-title"
     divScoreEl.innerHTML = 
         "<h2>" + outro + "</h2>"
         // TODO: FIX score to print on page
-        + "<p>" + 'Your final score is' + ' ' + score + '.' + "</p>"
+        + "<p>" + 'Your final score is' + ' ' + finalScore + '.' + "</p>"
     formScoreEl.appendChild(divScoreEl)
     console.log(divScoreEl)
 
@@ -315,6 +299,4 @@ answerFormEl.addEventListener("click", e=>{
     reset();
 })
 
-// mainEl.addEventListener("submit", quizFormHandler);
-// Handle User's answer
-// sectionEl.addEventListener("click", buttonClickHandler)
+
