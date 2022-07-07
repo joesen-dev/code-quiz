@@ -12,6 +12,9 @@ const questionFormEL = document.getElementById("form-question");
 // ANSWER BUTTONS CONTAINER
 const answerFormEl = document.getElementById("form-answer");
 
+// COUNTDOWN ELEMENT
+const countdownEl = document.getElementById("time-left");
+
 const titleFormEl = document.querySelector("#wrapper");
 const sectionEl = document.querySelector("#handle-btn")
 const sectionDivEl = document.querySelector("#handle-reset");
@@ -71,6 +74,25 @@ var trainArray = [];
 
 // STORE POINTS
 var score = [];
+
+function startCountDown(badAnswer) {
+    //  add Countdown timer and set amount of time
+    const startMinutes = 2;
+    let time = startMinutes * 60;
+
+
+    // set countdown interval
+    setInterval(updateCountdown, 1000);
+
+    // create countdown function
+    function updateCountdown(badAnswer) {
+        const minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+
+        countdownEl.innerHTML = `${minutes}: ${seconds}`;
+        time--;
+    }   
+}
 
 // START QUIZ LOGIC
 var quizFormHandler = function(event) {
@@ -251,7 +273,6 @@ var finishedQuiz = function() {
     divScoreEl.className = "quiz-title" + " score-title"
     divScoreEl.innerHTML = 
         "<h2>" + outro + "</h2>"
-        // TODO: FIX score to print on page
         + "<p>" + 'Your final score is' + ' ' + finalScore + '.' + "</p>"
     formScoreEl.appendChild(divScoreEl)
     console.log(divScoreEl)
@@ -267,6 +288,7 @@ var finishedQuiz = function() {
         +'Submit' + "</button>"
     divScoreEl.appendChild(userNamePEl)
 
+    // TODO: add logic to record User input on submit
 }
 
 // Click to Start Quiz
@@ -275,6 +297,7 @@ startQuiz.addEventListener("click", e=>{
     e.preventDefault();
     e.stopPropagation();
     console.log("Start Button Clicked!");
+    startCountDown();
     quizFormHandler();
 })
 
