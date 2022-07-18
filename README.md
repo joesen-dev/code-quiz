@@ -25,3 +25,4 @@ The Coding Quiz Challenge tests your knowledge of JavaScript.
 - Allow user to view high scores
 
 ## Website link
+https://joesen-dev.github.io/code-quiz/
